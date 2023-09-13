@@ -13,3 +13,6 @@ class Todo(models.Model):
 
     def __str__(self):
         return str(self.task)
+
+    class Meta:
+        db_table = "todos"
