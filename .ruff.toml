@@ -1,0 +1,4 @@
+exclude = [
+  "migrations",
+  "todoapp/settings.py"
+]

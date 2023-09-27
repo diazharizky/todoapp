@@ -1,18 +1,34 @@
-"""A file that defines app models"""
-
 from django.db import models
 
 
-class Todo(models.Model):
-    """Todo class"""
+class TrackingAttributes(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True)
 
+    class Meta:
+        abstract = True
+
+
+class SoftDeleteAttribute(models.Model):
+    deleted_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
+class Account(TrackingAttributes, SoftDeleteAttribute):
+    email = models.EmailField()
+
+    class Meta:
+        db_table = "accounts"
+
+
+class Todo(TrackingAttributes):
     task = models.CharField(max_length=180)
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, blank=True)
     completed = models.BooleanField(default=False, blank=True)
-    updated = models.DateTimeField(auto_now=True, blank=True)
-
-    def __str__(self):
-        return str(self.task)
 
     class Meta:
         db_table = "todos"
+
+    def __str__(self):
+        return f"{self.task}"

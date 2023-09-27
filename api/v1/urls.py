@@ -1,7 +1,6 @@
-"""save it for later"""
-
 from django.urls import path
-from .views import TodoListApiView, TodoDetailApiView
+from .views.todo_list import TodoListApiView
+from .views.todo_detail import TodoDetailApiView
 
 urlpatterns = [
     path("todos", TodoListApiView.as_view()),
