@@ -13,3 +13,6 @@ run:
 
 make_migrations:
 	$$(echo $(PYTHON_MANAGE)) makemigrations
+
+lint:
+	ruff check .
